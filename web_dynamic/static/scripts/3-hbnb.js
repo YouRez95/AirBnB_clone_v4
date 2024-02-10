@@ -40,7 +40,21 @@ $(document).ready(function () {
     success: function (data) {
       for (let i = 0; i < data.length; i++) {
         let place = data[i];
-        // TODO: Appending to div.places
+
+        let article = $('<article>');
+        let title = $('<h2>').text(place.name);
+        let priceByNight = $('<div>').addClass('price_by_night').html('<p>$' + place.price_by_night + '</p>');
+        let information = $('<div>').addClass('information');
+        let maxGuest = $('<div>').addClass('max_guest').append($('<div>').addClass('guest_image')).append($('<p>').text(place.max_guest));
+        let numberRooms = $('<div>').addClass('number_rooms').append($('<div>').addClass('bed_image')).append($('<p>').text(place.number_rooms));
+        let numberBathrooms = $('<div>').addClass('number_bathrooms').append($('<div>').addClass('bath_image')).append($('<p>').text(place.number_bathrooms));
+        let description = $('<div>').addClass('description').html('<p>' + place.description + '</p>');
+
+        information.append(maxGuest, numberRooms, numberBathrooms, description);
+
+        article.append(title, priceByNight, information);
+
+        $('.places').append(article);
       }
     }
   });
